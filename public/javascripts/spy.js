@@ -9,7 +9,7 @@ function getLocation() {
         navigator.geolocation.getCurrentPosition(function(position){
             var s = "Latitude: " + position.coords.latitude + ", Longitude: " + position.coords.longitude;
             console.log(s);
-            alert(s);
+            x.innerHTML = s;
         });
     } else {
         console.log("Geolocation is not supported by this browser.");
