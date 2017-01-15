@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    table.table.table-bordered
+        thead
+            tr
+                th ID
+                th COUNTRY
+                th REGION
+                th CITY
+                th ORG
+                th IP
+                th HOSTNAME
+                th SCREEN
+                th CREATED
+        tbody
+            each item in data
+                tr
+                    td= item.ID
+                    td= item.country
+                    td= item.region
+                    td= item.city
+                    td= item.org
+                    td= item.ip
+                    td= item.hostname
+                    td= item.screen
+                    td= item.created_at

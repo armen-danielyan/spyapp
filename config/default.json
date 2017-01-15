@@ -1,0 +1,9 @@
+{
+  "mysql": {
+    "host": "us-cdbr-iron-east-04.cleardb.net",
+    "user": "b4dbfde592319a",
+    "password": "84bbcd1d",
+    "database": "heroku_24d5c0bfc92fc1c",
+    "charset": "UTF8_GENERAL_CI"
+  }
+}
