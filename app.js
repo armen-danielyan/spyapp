@@ -11,6 +11,9 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var index = require('./routes/index');
 var result = require('./routes/result');
 
+/*var fbAuth = require('./routes/fbauth');
+var fbAuthCallback = require('./routes/fbauthcallback');*/
+
 var app = express();
 
 // view engine setup
@@ -27,6 +30,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/result', result);
+
+/*app.use('/auth/facebook', fbAuth);
+app.use('/auth/facebook/callback', fbAuthCallback);*/
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -63,8 +69,23 @@ passport.use(new FacebookStrategy({
     });
 }));
 
+passport.serializeUser(function(user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+    done(null, obj);
+});
+
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+    successRedirect: '/success',
+    failureRedirect: '/error'
+}));
 
 
 module.exports = app;
