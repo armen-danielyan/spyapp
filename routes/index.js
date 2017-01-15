@@ -5,13 +5,11 @@ var Model = require('../models/model');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    var output = req.headers['user-agent'];
+    var output = 'Hello';
     res.render('index', {title: 'Home', data: output});
 });
 
 router.post('/ajax', function (req, res, next) {
-    console.log( req.body );
-
     new Model.User({})
         .save({
             country: req.body.country,
@@ -20,13 +18,13 @@ router.post('/ajax', function (req, res, next) {
             org: req.body.org,
             ip: req.body.ip,
             hostname: req.body.hostname,
-            screen: req.body.screen
+            screen: req.body.screen,
+            useragent: req.headers['user-agent']
         })
         .then(function(model){
             console.log(model.toJSON());
+            res.json({id: model.toJSON().ID});
         });
-
-    res.json({hello: 'world'});
 });
 
 module.exports = router;

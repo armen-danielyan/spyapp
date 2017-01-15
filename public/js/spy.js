@@ -1,6 +1,3 @@
-console.log(navigator);
-console.log(history);
-
 function getLocation() {
     var loc = '';
     if (navigator.geolocation) {
@@ -12,9 +9,9 @@ function getLocation() {
 }
 
 $(document).ready(function(){
-    $.get("https://ipinfo.io", function(response) {
-        console.log(response);
+    var userID = 0;
 
+    $.get("https://ipinfo.io", function(response) {
         $.ajax({
             url: '/ajax',
             data: {
@@ -29,11 +26,13 @@ $(document).ready(function(){
             },
             type: 'POST',
             success: function(res){
-                console.log(res);
+                userID = res.id;
+                console.log(userID);
             }
         })
     }, "jsonp");
 
-    console.log(getLocation());
-
+    FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+    });
 });
