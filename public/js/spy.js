@@ -31,8 +31,4 @@ $(document).ready(function(){
             }
         })
     }, "jsonp");
-
-    FB.getLoginStatus(function(response) {
-        statusChangeCallback(response);
-    });
 });
