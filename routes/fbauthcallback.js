@@ -8,7 +8,7 @@ var Model = require('../models/model');
 /* GET users listing. */
 router.get('/', passport.authenticate('facebook', {
     successRedirect: '/',
-    failureRedirect: '/login'
+    failureRedirect: '/'
 }));
 
 module.exports = router;

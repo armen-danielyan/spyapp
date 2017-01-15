@@ -68,26 +68,18 @@ passport.use(new FacebookStrategy({
 }, function(accessToken, refreshToken, profile, done) {
 
     process.nextTick(function() {
-        console.log(profile);
-        new Model.User()
-            .fetchAll()
-            .then(function(model){
-                console.log(model);
-                done(null, model);
-            });
+        //Assuming user exists
+        done(null, profile);
     });
+
 }));
 
 passport.serializeUser(function(user, done) {
-    done(null, user.ID);
+    done(null, user);
 });
 
-passport.deserializeUser(function(ID, done) {
-    new Model.User({ID: ID})
-        .fetch()
-        .then(function (user) {
-            done(null, user);
-        });
+passport.deserializeUser(function(obj, done) {
+    done(null, obj);
 });
 
 app.use(passport.initialize());
