@@ -11,8 +11,8 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var index = require('./routes/index');
 var result = require('./routes/result');
 
-/*var fbAuth = require('./routes/fbauth');
-var fbAuthCallback = require('./routes/fbauthcallback');*/
+var fbAuth = require('./routes/fbauth');
+var fbAuthCallback = require('./routes/fbauthcallback');
 
 var app = express();
 
@@ -31,8 +31,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/result', result);
 
-/*app.use('/auth/facebook', fbAuth);
-app.use('/auth/facebook/callback', fbAuthCallback);*/
+app.use('/auth/facebook', fbAuth);
+app.use('/auth/facebook/callback', fbAuthCallback);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -52,12 +52,6 @@ app.use(function (err, req, res, next) {
     res.render('error');
 });
 
-/*passport.use(new FacebookStrategy({
-        clientID: '156472874842583',
-        clientSecret: 'd82f769751e94e16e261613ef278b77d',
-        callbackURL: '/auth/facebook/callback'
-    }
-));*/
 passport.use(new FacebookStrategy({
     clientID: '156472874842583',
     clientSecret: 'd82f769751e94e16e261613ef278b77d',
@@ -80,12 +74,12 @@ passport.deserializeUser(function(obj, done) {
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/auth/facebook', passport.authenticate('facebook'));
+/*app.get('/auth/facebook', passport.authenticate('facebook'));
 
 app.get('/auth/facebook/callback', passport.authenticate('facebook', {
     successRedirect: '/success',
     failureRedirect: '/error'
-}));
+}));*/
 
 
 module.exports = app;

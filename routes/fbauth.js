@@ -1,11 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
+var passport = require('passport');
+
 var Model = require('../models/model');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-    res.render('result', {title: 'Result'});
+    passport.authenticate('facebook');
 });
 
 module.exports = router;
