@@ -73,16 +73,21 @@ passport.use(new FacebookStrategy({
             .fetchAll()
             .then(function(model){
                 console.log(model);
-            })
+                done(null, model);
+            });
     });
 }));
 
 passport.serializeUser(function(user, done) {
-    done(null, user);
+    done(null, user.ID);
 });
 
-passport.deserializeUser(function(obj, done) {
-    done(null, obj);
+passport.deserializeUser(function(ID, done) {
+    new Model.User({ID: ID})
+        .fetch()
+        .then(function (user) {
+            done(null, user);
+        });
 });
 
 app.use(passport.initialize());
