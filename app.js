@@ -61,6 +61,7 @@ passport.use(new FacebookStrategy({
 }, function(accessToken, refreshToken, profile, done) {
 
     process.nextTick(function() {
+        console.log(profile);
         new Model.User()
             .fetchAll()
             .then(function(model){
