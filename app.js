@@ -61,7 +61,7 @@ app.use(function (err, req, res, next) {
 passport.use(new FacebookStrategy({
     clientID: '156472874842583',
     clientSecret: 'd82f769751e94e16e261613ef278b77d',
-    callbackURL: 'https://picview.herokuapp.com/auth/facebook'
+    callbackURL: 'https://picview.herokuapp.com/auth/facebook/callback'
 }, function(accessToken, refreshToken, profile, done) {
     process.nextTick(function() {
         //Assuming user exists
