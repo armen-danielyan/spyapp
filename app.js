@@ -58,6 +58,7 @@ passport.use(new FacebookStrategy({
     callbackURL: 'https://picview.herokuapp.com/auth/facebook/callback'
 }, function(accessToken, refreshToken, profile, done) {
     process.nextTick(function() {
+        console.log(profile);
         //Assuming user exists
         done(null, profile);
     });
