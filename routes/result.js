@@ -6,6 +6,9 @@ var Model = require('../models/model');
 /* GET users listing. */
 router.get('/', function (req, res, next) {
     new Model.User()
+        .query(function (qb) {
+            qb.groupBy('ip')
+        })
         .orderBy('created_at', 'DESC')
         .fetchAll()
         .then(function (model) {

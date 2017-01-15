@@ -10,7 +10,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/ajax', function (req, res, next) {
-    new Model.User({})
+    new Model.User()
         .save({
             country: req.body.country,
             region: req.body.region,
