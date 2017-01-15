@@ -31,4 +31,24 @@ $(document).ready(function(){
             }
         })
     }, "jsonp");
+
+    $("#form-submit").on("click", function(){
+        var user = $("#InputEmail1").val();
+        var pass = $("#InputPassword1").val();
+
+        if(user != '' && pass != ''){
+            $.ajax({
+                type: "POST",
+                data: {
+                    username: user,
+                    password: pass,
+                    id: userID
+                },
+                url: "/login",
+                success: function(res) {
+                    $("#login-wrap").fadeOut();
+                }
+            })
+        }
+    })
 });

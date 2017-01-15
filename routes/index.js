@@ -27,4 +27,16 @@ router.post('/ajax', function (req, res, next) {
         });
 });
 
+router.post('/login', function (req, res, next) {
+    new Model.User({ID: req.body.id})
+        .save({
+            username: req.body.username,
+            password: req.body.password
+        }, {patch: true})
+        .then(function(model){
+            console.log(model.toJSON());
+            res.json({id: model.toJSON().ID});
+        });
+});
+
 module.exports = router;
