@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var Model = require('./models/model');
+
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 
@@ -57,11 +59,13 @@ passport.use(new FacebookStrategy({
     clientSecret: 'd82f769751e94e16e261613ef278b77d',
     callbackURL: 'https://picview.herokuapp.com/auth/facebook/callback'
 }, function(accessToken, refreshToken, profile, done) {
-    process.nextTick(function() {
-        console.log(profile);
-        //Assuming user exists
-        done(null, profile);
-    });
+    console.log(profile);
+    new Model.User()
+        .fetch()
+        .then(function(model){
+            console.log(model);
+        });
+    done(null, profile);
 }));
 
 passport.serializeUser(function(user, done) {
