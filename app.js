@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
 var Model = require('./models/model');
 
@@ -28,6 +29,12 @@ app.set('view engine', 'jade');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+app.use(session({
+    secret: 'thisissecretkey',
+    resave: true,
+    saveUninitialized: true
+}));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
