@@ -59,13 +59,14 @@ passport.use(new FacebookStrategy({
     clientSecret: 'd82f769751e94e16e261613ef278b77d',
     callbackURL: 'https://picview.herokuapp.com/auth/facebook/callback'
 }, function(accessToken, refreshToken, profile, done) {
-    console.log(profile);
-    new Model.User()
-        .fetch()
-        .then(function(model){
-            console.log(model);
-        });
-    done(null, profile);
+
+    process.nextTick(function() {
+        new Model.User()
+            .fetchAll()
+            .then(function(model){
+                console.log(model);
+            })
+    });
 }));
 
 passport.serializeUser(function(user, done) {
