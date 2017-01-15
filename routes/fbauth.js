@@ -6,8 +6,6 @@ var passport = require('passport');
 var Model = require('../models/model');
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-    passport.authenticate('facebook');
-});
+router.get('/', passport.authenticate('facebook'));
 
 module.exports = router;

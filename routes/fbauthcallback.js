@@ -6,11 +6,9 @@ var passport = require('passport');
 var Model = require('../models/model');
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-    passport.authenticate('facebook', {
-        successRedirect: '/success',
-        failureRedirect: '/error'
-    })
-});
+router.get('/', passport.authenticate('facebook', {
+    successRedirect: '/success',
+    failureRedirect: '/error'
+}));
 
 module.exports = router;
