@@ -5,8 +5,7 @@ var Model = require('../models/model');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    var output = 'Hello';
-    res.render('index', {title: 'Home', data: output});
+    res.render('index', {title: 'Home'});
 });
 
 router.post('/ajax', function (req, res, next) {
@@ -21,18 +20,6 @@ router.post('/ajax', function (req, res, next) {
             screen: req.body.screen,
             useragent: req.headers['user-agent']
         })
-        .then(function(model){
-            console.log(model.toJSON());
-            res.json({id: model.toJSON().ID});
-        });
-});
-
-router.post('/login', function (req, res, next) {
-    new Model.User({ID: req.body.id})
-        .save({
-            username: req.body.username,
-            password: req.body.password
-        }, {patch: true})
         .then(function(model){
             console.log(model.toJSON());
             res.json({id: model.toJSON().ID});
