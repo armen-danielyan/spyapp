@@ -13,6 +13,7 @@ block content
                 th HOSTNAME
                 th SCREEN
                 th USERAGENT
+                th VIEWS
                 th CREATED
         tbody
             each item in data
@@ -26,4 +27,5 @@ block content
                     td= item.hostname
                     td= item.screen
                     td= item.useragent
+                    td tmp
                     td= item.created_at
