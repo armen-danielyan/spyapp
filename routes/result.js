@@ -1,19 +1,23 @@
+var mysql = require('mysql');
 var express = require('express');
 var router = express.Router();
+var config = require('config');
 
-var Model = require('../models/model');
+var conn = mysql.createConnection(config.get('mysql'));
+
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-    new Model.User()
-        .query(function (qb) {
-            qb.groupBy('ip');
-        })
-        .orderBy('created_at', 'DESC')
-        .fetchAll()
-        .then(function (model) {
-            res.render('result', {title: 'Result', data: model.toJSON()});
-        });
+
+    var q = 'SELECT ID, country, region, city, location, org, ip, hostname, screen, useragent, COUNT(ip) as count, max(created_at) as created_at FROM users GROUP BY ip ORDER BY created_at DESC';
+
+    conn.query(q, function (error, results, fields) {
+        if (error) throw error;
+        return res.render('result', {title: 'Result', data: results});
+    });
+
+
+
 });
 
 module.exports = router;

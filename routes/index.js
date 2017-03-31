@@ -22,7 +22,18 @@ router.post('/ajax', function (req, res, next) {
         })
         .then(function(model){
             console.log(model.toJSON());
-            res.json({id: model.toJSON().ID});
+            return res.json({id: model.toJSON().ID});
+        });
+});
+
+router.post('/loc', function (req, res, next) {
+    new Model.User({ID: req.body.id})
+        .save({
+            location: req.body.loc
+        }, {patch: true})
+        .then(function(model){
+            console.log(model.toJSON());
+            return res.json({id: model.toJSON().ID});
         });
 });
 
