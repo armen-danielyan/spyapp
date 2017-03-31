@@ -9,12 +9,13 @@ block content
                 th REGION
                 th CITY
                 th ORG
+                th LOCATION
                 th IP
                 th HOSTNAME
                 th SCREEN
                 th USERAGENT
-                th VIEWS
-                th CREATED
+                th LAST VISIT
+                th VISITS
         tbody
             each item in data
                 tr
@@ -23,9 +24,11 @@ block content
                     td= item.region
                     td= item.city
                     td= item.org
+                    td
+                        a(href= item.location target= '_blank')= item.location
                     td= item.ip
                     td= item.hostname
                     td= item.screen
                     td= item.useragent
-                    td tmp
-                    td= item.created_at
+                    td= item.created
+                    td= item.count
