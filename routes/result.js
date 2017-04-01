@@ -9,7 +9,7 @@ var mysqlPool  = mysql.createPool(config.get('mysql'));
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-    var strQuery = 'SELECT *, COUNT(ip) as count, max(created_at) as created FROM users GROUP BY ip ORDER BY created_at DESC';
+    var strQuery = 'SELECT *, COUNT(ip) as count, created_at as created FROM (SELECT * FROM users ORDER BY created_at DESC) as users GROUP BY ip ORDER BY created_at DESC';
     mysqlPool.getConnection(function(err, conn) {
         if(err) throw err;
         conn.query(strQuery, function(err, rows) {
